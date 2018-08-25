@@ -51,6 +51,7 @@ extras_require = {
         'Sphinx>=1.5.1',
     ],
     'tests': tests_require,
+
     # Elasticsearch version
     'elasticsearch2': [
         'elasticsearch>=2.0.0,<3.0.0',
