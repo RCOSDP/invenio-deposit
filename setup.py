@@ -37,7 +37,7 @@ tests_require = [
     'invenio-access>=1.0.0a11',
     'invenio-accounts>=1.0.0b1',
     'isort>=4.2.2',
-    'psycopg2>=2.6.1',
+    'psycopg2>=2.7.1',
     'pydocstyle>=1.0.0',
     'pytest-cache>=1.0',
     'pytest-cov>=1.8.0',
@@ -64,11 +64,16 @@ extras_require = {
         'elasticsearch>=6.0.0,<7.0.0',
         'elasticsearch-dsl>=6.0.0,<6.2.0',
     ],
+
 }
 
 extras_require['all'] = []
-for reqs in extras_require.values():
+for name, reqs in extras_require.items():
+    if name[0] == ':' or name in (
+            'elasticsearch2', 'elasticsearch5', 'elasticsearch6'):
+        continue
     extras_require['all'].extend(reqs)
+
 
 setup_requires = [
     'Babel>=1.3',
