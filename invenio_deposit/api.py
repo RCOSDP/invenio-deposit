@@ -207,7 +207,7 @@ class Deposit(Record):
 
     @classmethod
     @index
-    def create(cls, data, id_=None):
+    def create(cls, data, id_=None, recid=None):
         """Create a deposit.
 
         Initialize the follow information inside the deposit:
@@ -232,7 +232,10 @@ class Deposit(Record):
         ))
         if '_deposit' not in data:
             id_ = id_ or uuid.uuid4()
-            cls.deposit_minter(id_, data)
+            if not recid:
+                cls.deposit_minter(id_, data)
+            else:
+                cls.deposit_minter(id_, data, recid=recid)
 
         data['_deposit'].setdefault('owners', list())
         if current_user and current_user.is_authenticated:
